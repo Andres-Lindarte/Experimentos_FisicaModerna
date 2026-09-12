@@ -1,0 +1,32 @@
+### Frist experiment: ###
+
+    Given a temperature, we meassure a "black body" spectrum, on t_1.txt
+    T_1: 
+        V = 7.07
+        I = 3.15
+
+    The graph is on "sprectum.pdf"
+
+### Second experiment: ###
+
+    Given three wave lenghts (the ones on the spectrum), we meassure 6 temperatures and radiances.
+    The data are on temp_450.txt, temp_685.txt and temp_895.txt.
+
+    After the calculations, the linear regression is plotted on 
+    linear_regression_plot_450.txt, linear_regression_plot_685.txt and linear_regression_plot_895.txt
+
+            --- Data for wavelength 450 nm: ---
+        Slope: 906.0452671122338
+        Intercept: -0.004347681667560249
+        R-squared: 0.9974582964782368
+
+            --- Data for wavelength 685 nm: ---
+        Slope: 849.8844613368634
+        Intercept: -0.014925850164583254
+        R-squared: 0.9958983409489766
+
+            --- Data for wavelength 895 nm: ---
+        Slope: 862.4746091875497
+        Intercept: -0.008836000052862225
+        R-squared: 0.9936702161099573
+
