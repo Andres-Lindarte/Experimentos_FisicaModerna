@@ -30,7 +30,7 @@ def linear_regression(x, y):
     r_squared = r_pearson**2 # Calculate the R-squared value
     return slope, intercept, r_squared
 
-def plot_data(wl, x, y, slope, intercept, folder_name='results'):
+def individual_plot(wl, x, y, slope, intercept, folder_name='results'):
 
     os.makedirs(folder_name, exist_ok=True) # Create the folder if it doesn't exist
 
@@ -51,14 +51,58 @@ def plot_data(wl, x, y, slope, intercept, folder_name='results'):
     plt.legend(frameon=True, edgecolor="gray") # Show legend
     #sns.despine() # Remove the top and right spines of the plot
     
-    #plt.show() # Show the plot
+    #plt.show() 
     file_path = os.path.join(folder_name, f"linear_regression_plot_{wl}.pdf")
     plt.savefig(file_path, dpi=300, bbox_inches='tight') # Save the plot as a PDF file
     plt.close() # Close the plot to free memory
 
+def grouped_plot(wave_lengths, x_data, y_data, slopes, intercepts, markers, colors, folder_name='results'):
+
+    os.makedirs(folder_name, exist_ok=True) # Create the folder if it doesn't exist
+
+    plt.figure(figsize=(8, 6)) # Set the figure size
+
+    sns.set_context("paper", font_scale=1.2) 
+    sns.set_style("ticks") # Set the style of the plot
+
+    for wl, x, y, slope, intercept, marker, color in zip(wave_lengths, x_data, y_data, slopes, intercepts, markers, colors):
+        X = np.array(x) # Convert the list to a numpy array
+        Y = np.array(y) 
+        plt.scatter(X, Y, label=f'Data points (λ={wl} nm)', marker=marker, color=color) # Scatter plot of the data points
+        plt.plot(X, slope * X + intercept, label=f'Fitted line (λ={wl} nm)', color=color) # Plot the fitted line
+
+    plt.xlabel(r"$\left(\frac{1}{T_2} - \frac{1}{T_1}\right) \quad [\mathrm{K}^{-1}]$") # X-axis label
+    plt.ylabel(r"$\ln\left(\frac{R_1}{R_2}\right)$") # Y-axis label
+    plt.title('Linear Regression for Different Wavelengths') # Title of the plot
+    plt.legend(frameon=True, edgecolor="gray") # Show legend
+    #sns.despine() # Remove the top and right spines of the plot
+    
+    #plt.show() 
+    file_path = os.path.join(folder_name, f"grouped_linear_regression_plot.pdf")
+    plt.savefig(file_path, dpi=300, bbox_inches='tight') # Save the plot as a PDF file
+    plt.close() # Close the plot to free memory
+
 def main():
+    #Set the global configuration dor the plotting
+    plt.rcParams["pdf.fonttype"] = 42
+    plt.rcParams["ps.fonttype"] = 42
+    plt.rcParams["axes.edgecolor"] = "black"  
+    plt.rcParams["axes.linewidth"] = 1.2  
+    plt.rcParams["xtick.color"] = "black"  
+    plt.rcParams["ytick.color"] = "black" 
+    plt.rcParams["xtick.top"] = True
+    plt.rcParams["ytick.right"] = True
+    plt.rcParams["xtick.direction"] = "in"
+    plt.rcParams["ytick.direction"] = "in"
+
     wave_lengths = [450, 685, 895] # Wavelengths in nm
     folder_name = 'results'
+    grouped_x_data = []
+    grouped_y_data = []
+    slopes = []
+    intercepts = []
+    markers = ["o", "s", "^"]  # Different markers for each wavelength
+    colors = ["blue", "green", "orange"]  # Different colors for each wavelength
 
     for wl in wave_lengths:
         df = read_values(f'temp_{wl}.txt')
@@ -91,7 +135,16 @@ def main():
         print(f"Intercept: {intercept}")
         print(f"R-squared: {r_squared}")
 
-        plot_data(wl, inverse_diference_temps, log_resistance, slope, intercept)
+        individual_plot(wl, inverse_diference_temps, log_resistance, slope, intercept)
+
+        # Store the data for grouped plotting
+        grouped_x_data.append(inverse_diference_temps)
+        grouped_y_data.append(log_resistance)
+        slopes.append(slope)
+        intercepts.append(intercept)
+
+    grouped_plot(wave_lengths, grouped_x_data, grouped_y_data, slopes, intercepts, markers, colors)
+
 
 if __name__ == "__main__":
     main()
