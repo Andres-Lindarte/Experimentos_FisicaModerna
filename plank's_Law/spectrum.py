@@ -17,7 +17,7 @@ def plot_data(wave_length, points, folder_name='results'):
     sns.set_style("ticks") # Set the style of the plot
 
     plt.plot(wave_length, points, marker='o', linestyle='-', color='b')
-    plt.title('Data Points')
+    plt.title('Figure 2: Data Points')
     plt.xlabel('Wavelength (nm)')
     plt.ylabel('Radiance (W/m^2/nm)')
     #plt.grid(True)
@@ -31,6 +31,18 @@ def plot_data(wave_length, points, folder_name='results'):
 
 
 def main():
+    #Set the global configuration dor the plotting
+    plt.rcParams["pdf.fonttype"] = 42
+    plt.rcParams["ps.fonttype"] = 42
+    plt.rcParams["axes.edgecolor"] = "black"  
+    plt.rcParams["axes.linewidth"] = 1.2  
+    plt.rcParams["xtick.color"] = "black"  
+    plt.rcParams["ytick.color"] = "black" 
+    plt.rcParams["xtick.top"] = True
+    plt.rcParams["ytick.right"] = True
+    plt.rcParams["xtick.direction"] = "in"
+    plt.rcParams["ytick.direction"] = "in"
+
     file_name = 't_1.txt'
     folder_name = 'results'
     

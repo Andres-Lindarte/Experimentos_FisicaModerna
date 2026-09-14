@@ -73,7 +73,7 @@ def grouped_plot(wave_lengths, x_data, y_data, slopes, intercepts, markers, colo
 
     plt.xlabel(r"$\left(\frac{1}{T_2} - \frac{1}{T_1}\right) \quad [\mathrm{K}^{-1}]$") # X-axis label
     plt.ylabel(r"$\ln\left(\frac{R_1}{R_2}\right)$") # Y-axis label
-    plt.title('Linear Regression for Different Wavelengths') # Title of the plot
+    plt.title('Figure 3: Linear Regression for Different Wavelengths') # Title of the plot
     plt.legend(frameon=True, edgecolor="gray") # Show legend
     #sns.despine() # Remove the top and right spines of the plot
     
