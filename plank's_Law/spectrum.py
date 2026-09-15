@@ -17,7 +17,7 @@ def plot_data(wave_length, points, folder_name='results'):
     sns.set_style("ticks") # Set the style of the plot
 
     plt.plot(wave_length, points, marker='o', linestyle='-', color='b')
-    plt.title('Figure 2: Data Points')
+    plt.title('Figure 2: Data Points', fontsize=14)
     plt.xlabel('Wavelength (nm)')
     plt.ylabel('Radiance (W/m^2/nm)')
     #plt.grid(True)
