@@ -29,28 +29,82 @@ def linear_regression(x, y):
     r_squared = r_pearson**2 # Calculate the R-squared value
     return slope, intercept, r_squared
 
-def plot_data(metal_name, x, y, slope_1, slope_2, intercept_1, intercept_2, folder_name='results'):
+def calorific_capacity(mass_metal, intercepts):
+    L = 1   # CHANGE
+    delta_temp = 1  # CHANGE
+    delta_mass = intercepts[0] - intercepts[2]
+    cal_capacity = (L * delta_mass) / (mass_metal * delta_temp)
+    return delta_mass, cal_capacity
+
+def grouped_plot(figure_number,metal, x_data, y_data, slopes, intercepts, folder_name='results'):
 
     os.makedirs(folder_name, exist_ok=True) # Create the folder if it doesn't exist
-
-    X = np.array(x) # Convert the list to a numpy array
-    Y = np.array(y) 
 
     plt.figure(figsize=(8, 6)) # Set the figure size
 
     sns.set_context("paper", font_scale=1.2) 
     sns.set_style("ticks") # Set the style of the plot
 
-    plt.scatter(X, Y, color='blue', label='Data points') # Scatter plot of the data points
-    plt.plot(X, slope_1 * X + intercept_1, color='red', label='Fitted line') # Plot the fitted line
+    for x, y, slope, intercept in zip(x_data, y_data, slopes, intercepts):
+        X = np.array(x) # Convert the list to a numpy array
+        Y = np.array(y) 
+        plt.scatter(X, Y) # Scatter plot of the data points
+        if slope is not None and intercept is not None:
+            plt.plot(X, slope * X + intercept) # Plot the fitted line
 
-    plt.xlabel(r"$\left(\frac{1}{T_2} - \frac{1}{T_1}\right) \quad [\mathrm{K}^{-1}]$") # X-axis label
-    plt.ylabel(r"$\ln\left(\frac{R_1}{R_2}\right)$") # Y-axis label
-    plt.title(f'Linear Regression for $\\lambda = {wl}$ nm') # Title of the plot
-    plt.legend(frameon=True, edgecolor="gray") # Show legend
+    plt.xlabel("Time (s)") # X-axis label
+    plt.ylabel("Mass (g)") # Y-axis label
+    plt.title(f'Figure {figure_number + 1}: Mass as function of time for {metal.capitalize()}') # Title of the plot
+    #plt.legend(frameon=True, edgecolor="gray") # Show legend
     #sns.despine() # Remove the top and right spines of the plot
     
-    #plt.show() # Show the plot
-    file_path = os.path.join(folder_name, f"linear_regression_plot_{wl}.pdf")
+    #plt.show() 
+    file_path = os.path.join(folder_name, f"{metal}_mass_change.pdf")
     plt.savefig(file_path, dpi=300, bbox_inches='tight') # Save the plot as a PDF file
     plt.close() # Close the plot to free memory
+
+def main():
+    #Set the global configuration dor the plotting
+    plt.rcParams["pdf.fonttype"] = 42
+    plt.rcParams["ps.fonttype"] = 42
+    plt.rcParams["axes.edgecolor"] = "black"  
+    plt.rcParams["axes.linewidth"] = 1.2  
+    plt.rcParams["xtick.color"] = "black"  
+    plt.rcParams["ytick.color"] = "black" 
+    plt.rcParams["xtick.top"] = True
+    plt.rcParams["ytick.right"] = True
+    plt.rcParams["xtick.direction"] = "in"
+    plt.rcParams["ytick.direction"] = "in"
+
+    #metals = ['lead', 'aluminum', 'copper', 'cadmium', 'indium', 'iron']
+    metals = ['lead', 'aluminum']
+
+    print("\t--- Calorific Capacity Results: ---")
+    for number, solid in enumerate(metals): # Get the metals data
+        time_data = []
+        mass_data = []
+        slopes = []
+        intercepts = []
+        for ii in range(1, 4): # Get the three phases of the montage 
+            # Read the data
+            file_name = f"{solid}_{ii}.txt"
+            points = read_values(file_name)
+            time = points['Time']
+            mass = points['Mass']
+            # Calculate the lines for phase 1 and 3
+            if ii == 1 or ii == 3:
+                slope, intercept, _ = linear_regression(time, mass)
+                slopes.append(slope)
+                intercepts.append(intercept)
+            else: 
+                slopes.append(None)
+                intercepts.append(None)
+            # Groups the x and y data for the grouped plot
+            time_data.append(time)
+            mass_data.append(mass)
+        delta_mass, cal_capacity = calorific_capacity(mass_metal=1, intercepts=intercepts) 
+        print(f"Metal: {solid.capitalize()}, Δm: {delta_mass:.4f} g, Calorific Capacity: {cal_capacity:.4f} J/g·K")
+        grouped_plot(number, solid, time_data, mass_data, slopes, intercepts, folder_name='results')
+
+if __name__ == "__main__":
+    main()
