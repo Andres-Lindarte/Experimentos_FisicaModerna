@@ -30,8 +30,8 @@ def linear_regression(x, y):
     return slope, intercept, r_squared
 
 def calorific_capacity(mass_metal, intercepts):
-    L = 1   # CHANGE
-    delta_temp = 1  # CHANGE
+    L = 5.56   # Constant of the nitrogen [cal/g]
+    delta_temp = 216.5  # Since Ni is at 77K
     delta_mass = intercepts[0] - intercepts[2]
     cal_capacity = (L * delta_mass) / (mass_metal * delta_temp)
     return delta_mass, cal_capacity
@@ -76,8 +76,10 @@ def main():
     plt.rcParams["xtick.direction"] = "in"
     plt.rcParams["ytick.direction"] = "in"
 
-    #metals = ['lead', 'aluminum', 'copper', 'cadmium', 'indium', 'iron']
-    metals = ['lead', 'aluminum']
+    #metals = ['lead', 'aluminum', 'copper', 'zinc', 'tin']
+    metals = ['copper']
+    #metals_mass = [229.0, 9.7, 192.5, 62.2, 57.9] # Experimental data
+    metals_mass = [192.5] # Experimental data for copper
 
     print("\t--- Calorific Capacity Results: ---")
     for number, solid in enumerate(metals): # Get the metals data
@@ -102,8 +104,8 @@ def main():
             # Groups the x and y data for the grouped plot
             time_data.append(time)
             mass_data.append(mass)
-        delta_mass, cal_capacity = calorific_capacity(mass_metal=1, intercepts=intercepts) 
-        print(f"Metal: {solid.capitalize()}, Δm: {delta_mass:.4f} g, Calorific Capacity: {cal_capacity:.4f} J/g·K")
+        delta_mass, cal_capacity = calorific_capacity(mass_metal=metals_mass[number], intercepts=intercepts) 
+        print(f"Metal: {solid.capitalize()}, Δm: {delta_mass:.4f} g, Calorific Capacity: {cal_capacity:.4f} cal/g·K")
         grouped_plot(number, solid, time_data, mass_data, slopes, intercepts, folder_name='results')
 
 if __name__ == "__main__":
