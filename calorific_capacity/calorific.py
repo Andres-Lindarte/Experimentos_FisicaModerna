@@ -30,13 +30,17 @@ def linear_regression(x, y):
     return slope, intercept, r_squared
 
 def calorific_capacity(mass_metal, intercepts):
-    L = 5.56   # Constant of the nitrogen [cal/g]
+    L = 47.6   # Constant of the nitrogen [cal/g]
     delta_temp = 216.5  # Since Ni is at 77K
     delta_mass = intercepts[0] - intercepts[2]
     cal_capacity = (L * delta_mass) / (mass_metal * delta_temp)
     return delta_mass, cal_capacity
 
-def grouped_plot(figure_number,metal, x_data, y_data, slopes, intercepts, folder_name='results'):
+def relative_error(measured, true):
+    error = abs(measured - true) / true * 100
+    return error
+
+def grouped_plot(figure_number, metal, x_data, y_data, slopes, intercepts, last_time, folder_name='results'):
 
     os.makedirs(folder_name, exist_ok=True) # Create the folder if it doesn't exist
 
@@ -50,7 +54,8 @@ def grouped_plot(figure_number,metal, x_data, y_data, slopes, intercepts, folder
         Y = np.array(y) 
         plt.scatter(X, Y) # Scatter plot of the data points
         if slope is not None and intercept is not None:
-            plt.plot(X, slope * X + intercept) # Plot the fitted line
+            X_full_range = np.linspace(0, last_time, 100) # Create a range of x values for the fitted line
+            plt.plot(X_full_range, slope * X_full_range + intercept) # Plot the fitted line
 
     plt.xlabel("Time (s)") # X-axis label
     plt.ylabel("Mass (g)") # Y-axis label
@@ -76,12 +81,12 @@ def main():
     plt.rcParams["xtick.direction"] = "in"
     plt.rcParams["ytick.direction"] = "in"
 
-    #metals = ['lead', 'aluminum', 'copper', 'zinc', 'tin']
-    metals = ['copper']
-    #metals_mass = [229.0, 9.7, 192.5, 62.2, 57.9] # Experimental data
-    metals_mass = [192.5] # Experimental data for copper
+    metals = ['lead', 'aluminum', 'copper', 'zinc', 'tin']
+    metals_mass = [229.0, 9.7, 192.5, 62.2, 57.9] # Experimental data
+    real_calorific_capacity = [0.031, 0.214, 0.092, 0.093, 0.054] # Real calorific capacity values [cal/g·K]
 
-    print("\t--- Calorific Capacity Results: ---")
+    fout = open("results/results.txt", "w") # Open a file to write the results
+    fout.write("\t--- Calorific Capacity Results: ---\n")
     for number, solid in enumerate(metals): # Get the metals data
         time_data = []
         mass_data = []
@@ -105,8 +110,11 @@ def main():
             time_data.append(time)
             mass_data.append(mass)
         delta_mass, cal_capacity = calorific_capacity(mass_metal=metals_mass[number], intercepts=intercepts) 
-        print(f"Metal: {solid.capitalize()}, Δm: {delta_mass:.4f} g, Calorific Capacity: {cal_capacity:.4f} cal/g·K")
-        grouped_plot(number, solid, time_data, mass_data, slopes, intercepts, folder_name='results')
+        porcentual_rel_error = relative_error(cal_capacity, real_calorific_capacity[number])
+        fout.write(f"Metal: {solid.capitalize()}, Δm: {delta_mass:.4f} g, Calorific Capacity: {cal_capacity:.4f} cal/g·K, Relative Error: {porcentual_rel_error:.2f}%\n")
+        fout.close() # Close the file after writing all results
+
+        grouped_plot(number, solid, time_data, mass_data, slopes, intercepts, last_time=max([max(t) for t in time_data]), folder_name='results')
 
 if __name__ == "__main__":
     main()

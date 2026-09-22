@@ -1,0 +1,6 @@
+	--- Calorific Capacity Results: ---
+Metal: Lead, Δm: 30.0085 g, Calorific Capacity: 0.0288 cal/g·K, Relative Error: 7.06%
+Metal: Aluminum, Δm: 6.8909 g, Calorific Capacity: 0.1562 cal/g·K, Relative Error: 27.01%
+Metal: Copper, Δm: 72.4672 g, Calorific Capacity: 0.0828 cal/g·K, Relative Error: 10.04%
+Metal: Zinc, Δm: 22.8015 g, Calorific Capacity: 0.0806 cal/g·K, Relative Error: 13.34%
+Metal: Tin, Δm: 12.8810 g, Calorific Capacity: 0.0489 cal/g·K, Relative Error: 9.42%
