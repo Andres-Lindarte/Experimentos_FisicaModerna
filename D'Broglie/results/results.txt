@@ -1,0 +1,27 @@
+	--- Calorific Capacity Results: ---
+
+--- Data from d_1.txt ---
+Voltage (KV): [2500. 3000. 3500. 4000. 4500. 5000.]
+Internal Diameter (mm): [29.   27.15 26.15 23.2  22.4  21.8 ]
+External Diameter (mm): [35.   31.25 30.   28.5  26.   25.6 ]
+Mean Diameter (mm): [32.    29.2   28.075 25.85  24.2   23.7  ]
+
+	RESULTS: 
+Slope: -1.0399291713330887
+Intercept: 0.037432214698858934
+Distance (D_1): -5.896912170805092e-10
+Real distance: 2.13e-10
+Relative error: 376.85033665751604
+
+--- Data from d_2.txt ---
+Voltage (KV): [2500. 3000. 3500. 4000. 4500. 5000.]
+Internal Diameter (mm): [52.7  48.1  44.15 42.85 39.45 38.1 ]
+External Diameter (mm): [60.1 54.9 50.1 46.1 43.9 44.1]
+Mean Diameter (mm): [56.4   51.5   47.125 44.475 41.675 41.1  ]
+
+	RESULTS: 
+Slope: -0.639936790420999
+Intercept: 0.02229355136650217
+Distance (D_2): -9.582776110082693e-10
+Real distance: 1.23e-10
+Relative error: 879.0874886246093
