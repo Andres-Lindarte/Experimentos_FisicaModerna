@@ -34,7 +34,7 @@ def mean_2_values(low: float, high: float):
     return (low + high)/2
 
 def calculate_sen_theta(diameter: float, long: float = 135):
-    return np.sin(2*np.arctan(diameter/(2*long))) # Calculate the sen of angle theta in radians
+    return np.sin(0.5*np.arctan(diameter/(2*long))) # Calculate the sen of angle theta in radians
 
 def calculate_inverse_squared_eV(voltaje: float):
     return (1/np.sqrt(voltaje*1000))
@@ -68,7 +68,7 @@ def grouped_plot(x_data: list, y_data: list, slopes: list, intercepts: list, fig
 
     plt.xlabel(r"$\frac{1}{\sqrt{eV}} [au]$") # X-axis label
     plt.ylabel(r"$\sin(\theta) [au]$") # Y-axis label
-    plt.title(f'Figure {figure_number}: title') # Title of the plot
+    plt.title(f'Figure {figure_number}: ' + r'$\sin(\theta)$ vs $\frac{1}{\sqrt{eV}}$') # Title of the plot
     #plt.legend(frameon=True, edgecolor="gray") # Show legend
     #sns.despine() # Remove the top and right spines of the plot
     
@@ -105,7 +105,7 @@ def main():
         file_name = f"d_{ii}.txt"
         points = read_values(file_name)
         fout.write(f"\n--- Data from {file_name} ---\n")
-        fout.write(f"Voltage (KV): {(points['potential'].values)*1000}\n")
+        fout.write(f"Voltage (V): {(points['potential'].values)*1000}\n")
         fout.write(f"Internal Diameter (mm): {points['internal'].values}\n")
         fout.write(f"External Diameter (mm): {points['external'].values}\n")
 
@@ -128,7 +128,7 @@ def main():
         fout.write(f"Intercept: {intercept}\n")
         fout.write(f"Distance (D_{ii}): {distance}\n")
         fout.write(f"Real distance: {real_distances[ii-1]}\n")
-        fout.write(f"Relative error: {rel_error}\n")
+        fout.write(f"Relative error: {rel_error}%\n")
     
     grouped_plot(X_total, Y_total, slopes, intercepts)
 
