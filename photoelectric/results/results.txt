@@ -1,0 +1,32 @@
+	--- Photoelectric experiment results: ---
+
+--- Data for 365.txt nm ---
+	Slope: 117.1664 
+	Intercept: 175.5985 
+	R-squared: 0.9627
+
+--- Data for 405.txt nm ---
+	Slope: 138.2942 
+	Intercept: 142.1276 
+	R-squared: 0.9901
+
+--- Data for 436.txt nm ---
+	Slope: 120.9171 
+	Intercept: 93.8190 
+	R-squared: 0.9854
+
+--- Data for 546.txt nm ---
+	Slope: 275.5247 
+	Intercept: 137.2762 
+	R-squared: 0.9962
+
+--- Data for 578.txt nm ---
+	Slope: 208.4942 
+	Intercept: 60.6651 
+	R-squared: 0.9450
+
+	--- Planck's constant and work function ---
+	Experimental Planck's constant (h): 5.7587e-34 J·s
+	Experimental Work function (w): 2.5119e-19 J
+	Relative error for Planck's constant: 13.09%
+	Relative error for work function: 10.17%
