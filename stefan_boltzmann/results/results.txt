@@ -1,0 +1,35 @@
+	--- Stefan-Boltzmann experiment results: ---
+
+--- Data for the distance 2.0 cm ---
+	Slope [Ln(T) -> Ln(P)]: 3.8141 
+	Intercept: -29.4894 
+	R-squared: 0.9987
+	Relative error: 4.65%
+
+--- Data for the distance 4.0 cm ---
+	Slope [Ln(T) -> Ln(P)]: 3.8002 
+	Intercept: -30.4304 
+	R-squared: 0.9997
+	Relative error: 4.99%
+
+--- Data for the distance 6.0 cm ---
+	Slope [Ln(T) -> Ln(P)]: 3.7720 
+	Intercept: -30.8352 
+	R-squared: 0.9995
+	Relative error: 5.70%
+
+--- Data for the distance 8.0 cm ---
+	Slope [Ln(T) -> Ln(P)]: 4.0875 
+	Intercept: -33.7985 
+	R-squared: 0.9985
+	Relative error: 2.19%
+
+--- Data for the distance 10.0 cm ---
+	Slope [Ln(T) -> Ln(P)]: 4.2555 
+	Intercept: -35.5730 
+	R-squared: 0.9959
+	Relative error: 6.39%
+
+	--- General Results ---
+	Mean Slope [Ln(T) -> Ln(P)]: 3.9459 
+	Relative error: 1.35%

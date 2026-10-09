@@ -1,0 +1,5 @@
+	--- Stefan-Boltzmann experiment results (variating the distance)- 6.9 V - 1.32 A: ---
+	Slope [Ln(D) -> Ln(P)]: -1.5641 
+	Intercept: -5.8367 
+	R-squared: 0.9971
+	Relative error: 21.80%
