@@ -12,7 +12,7 @@ def read_values(file_name: str):
     header: Since we don´t have headers on the raw text file
     names: Manually written headers 
     """
-    points = pd.read_csv(f"data/{file_name}", sep='\\s+', header=None, names=['V', 'R'])
+    points = pd.read_csv(f"data/{file_name}", sep='\\s+', header=None, names=['R', 'V'])
     return points 
 
 def linear_regression(x: list, y: list):
@@ -68,8 +68,7 @@ def fixed_plot(x, y, mask, slope, intercept, folder_name='results'):
 
     plt.scatter(X, Y, color='blue') # Scatter plot of the data points
     X_masked = X[mask]
-    Y_masked = Y[mask]
-    X_full_range = np.linspace(min(X_masked) - 0.025*max(X_masked), max(X_masked) + 0.025*max(X_masked), 100) # Create a range of x values for the fitted line
+    X_full_range = np.linspace(min(X_masked) - 0.015*max(X_masked), max(X_masked) + 0.015*max(X_masked), 100) # Create a range of x values for the fitted line
     plt.plot(X_full_range, slope * X_full_range + intercept, color='red') # Plot the fitted line
 
     plt.xlabel(r"$\frac{1}{T}$") # X-axis label
@@ -134,11 +133,13 @@ def main():
     individual_plot(X_data, Y_data)
 
     Y_log = np.log(Y_data)
-    slope, intercept, _ = linear_regression(X_data, Y_log)
-    mask = (X_data > 0.0025) & (X_data < 0.0035) # TO-DO
+    mask = (X_data <= 0.002428)
+    X_masked = X_data[mask]
+    Y_masked = Y_log[mask]
+    slope, intercept, _ = linear_regression(X_masked, Y_masked)
     fixed_plot(X_data, Y_log, mask, slope, intercept)
 
-    gap = slope*2.0*(8.617e-5) # Calculate the energy gap in eV using the slope and Boltzmann constant
+    gap = -slope*2.0*(8.617e-5) # Calculate the energy gap in eV using the slope and Boltzmann constant
 
     fout.write(f"\n\tGAP of energy of the germanium: {gap:.4f} eV \n\tRelative error: {relative_error(gap, 0.67):.2f}%\n")
 
