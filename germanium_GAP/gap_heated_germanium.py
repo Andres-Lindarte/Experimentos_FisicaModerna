@@ -68,7 +68,7 @@ def fixed_plot(x, y, mask, slope, intercept, folder_name='results'):
 
     plt.scatter(X, Y, color='blue') # Scatter plot of the data points
     X_masked = X[mask]
-    X_full_range = np.linspace(min(X_masked) - 0.015*max(X_masked), max(X_masked) + 0.015*max(X_masked), 100) # Create a range of x values for the fitted line
+    X_full_range = np.linspace(min(X_masked) - 0.01*max(X_masked), max(X_masked) + 0.01*max(X_masked), 100) # Create a range of x values for the fitted line
     plt.plot(X_full_range, slope * X_full_range + intercept, color='red') # Plot the fitted line
 
     plt.xlabel(r"$\frac{1}{T}$") # X-axis label
@@ -133,7 +133,8 @@ def main():
     individual_plot(X_data, Y_data)
 
     Y_log = np.log(Y_data)
-    mask = (X_data <= 0.002428)
+    #mask = (X_data <= 0.002428) 
+    mask = (X_data <= 0.002373) 
     X_masked = X_data[mask]
     Y_masked = Y_log[mask]
     slope, intercept, _ = linear_regression(X_masked, Y_masked)
