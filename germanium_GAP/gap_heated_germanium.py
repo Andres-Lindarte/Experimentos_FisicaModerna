@@ -43,8 +43,8 @@ def individual_plot(x, y, folder_name='results'):
 
     plt.scatter(X, Y, color='blue') # Scatter plot of the data points
 
-    plt.xlabel("Inverse of the temperature (1/K)") # X-axis label
-    plt.ylabel("Conductivity (S/m)") # Y-axis label
+    plt.xlabel(r"Inverse of the temperature ($\frac{1}{T}$) [1/K]") # X-axis label
+    plt.ylabel(r"Conductivity ($\sigma$) [S/m]") # Y-axis label
     plt.title(f'Figure 2:Conductivity (S/m) vs Inverse of the temperature (1/K)') # Title of the plot
     #plt.legend(frameon=True, edgecolor="gray") # Show legend
     #sns.despine() # Remove the top and right spines of the plot
@@ -71,8 +71,8 @@ def fixed_plot(x, y, mask, slope, intercept, folder_name='results'):
     X_full_range = np.linspace(min(X_masked) - 0.01*max(X_masked), max(X_masked) + 0.01*max(X_masked), 100) # Create a range of x values for the fitted line
     plt.plot(X_full_range, slope * X_full_range + intercept, color='red') # Plot the fitted line
 
-    plt.xlabel(r"$\frac{1}{T}$") # X-axis label
-    plt.ylabel(r"$\ln(\sigma)$") # Y-axis label
+    plt.xlabel(r"$\frac{1}{T}$ [1/K]") # X-axis label
+    plt.ylabel(r"$\ln(\sigma)$ [S/m]") # Y-axis label
     plt.title(r"Figure 3:$\ln(\sigma)$ vs $\frac{1}{T}$") # Title of the plot
     #plt.legend(frameon=True, edgecolor="gray") # Show legend
     #sns.despine() # Remove the top and right spines of the plot
