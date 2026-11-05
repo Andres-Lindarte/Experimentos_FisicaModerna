@@ -1,0 +1,4 @@
+	--- 'Radiation vs distance' results: ---
+Slope (log(Rad) vs log(d)): -1.5198454671086792
+Intercept (log(Rad) vs log(d)): 11.349829278231937
+R-squared (log(Rad) vs log(d)): 0.986198330459089

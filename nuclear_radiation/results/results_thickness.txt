@@ -1,0 +1,5 @@
+	--- 'Radiation vs thickness' results: ---
+Slope (log(Rad) vs thickness): -369.6251309657431
+Relative error (slope): -1795.513492132016%
+Intercept (log(Rad) vs thickness): 10.816328835184542
+R-squared (log(Rad) vs thickness): 0.8723731144967783
