@@ -125,7 +125,7 @@ def main():
     fout = open("results/results_thickness.txt", "w") # Open a file to write the results
     fout.write("\t--- 'Radiation vs thickness' results: ---\n")
     fout.write(f"Slope (log(Rad) vs thickness): {slope}\n")
-    fout.write(f"Relative error (slope): {relative_error(slope, -19.5)}%\n")
+    #fout.write(f"Relative error (slope): {relative_error(slope, -19.5)}%\n")
     fout .write(f"Intercept (log(Rad) vs thickness): {intercept}\n")
     fout.write(f"R-squared (log(Rad) vs thickness): {r_squared}\n")
     fout.close() # Close the file
