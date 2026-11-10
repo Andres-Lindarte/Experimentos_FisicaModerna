@@ -1,0 +1,10 @@
+	--- X-Ray experiment results: ---
+Frist order results (given by the Bragg's law) n=1 and d=282 pm:
+	K_alpha was fount at 6.4° (aprox); lamba = 6.29e-02 nm
+	K_betha was fount at 7.3° (aprox); lamba = 7.17e-02 nm
+
+Wavelength vs 1/Voltage to calculate the Plank's constant:
+	Slope = 1.28e+03 m*V
+	Intercept = -7.57e-03 m
+	R-squared = 0.9969908417943635
+	Plank's constant = 6.81e-34 J*s; Relative error = 2.76%
