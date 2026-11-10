@@ -83,7 +83,7 @@ def main():
     points = read_values(file_name, 'V', 'Rad')
     v = points['V']
     r = points['Rad']
-    individual_plot(v, r, "Voltage (V)", "Radiation ()", "Radiation vs Voltage", "devise_caracterization.pdf", lines=True)
+    individual_plot(v, r, "Voltage (V)", "Radiation ()", "Figure 2: Radiation vs Voltage", "devise_caracterization.pdf", lines=True)
     
     # Part 2: Changing the distance 
     file_name_2 = "radiation_vs_distance.txt"
@@ -98,8 +98,8 @@ def main():
         r_2.append(np.mean(r_2_raw[start:end]))
         r_2_log.append(np.mean(np.log(r_2_raw[start:end])))
     slope, intercept, r_squared = linear_regression(np.log(d), r_2_log)
-    individual_plot(d, r_2, "Distance (cm)", "Radiation ()", "Radiation vs Distance", "radiation_vs_distance.pdf")
-    individual_plot(np.log(d), r_2_log, "Log Distance (cm)", "Log Radiation", "Log Radiation  vs Log Distance", "log_radiation_vs_log_distance.pdf", slope=slope, intercept=intercept)
+    individual_plot(d, r_2, "Distance (cm)", "Radiation ()", "Figure 3: Radiation vs Distance", "radiation_vs_distance.pdf")
+    individual_plot(np.log(d), r_2_log, "Log Distance (cm)", "Log Radiation", "Figure 4: Log Radiation  vs Log Distance", "log_radiation_vs_log_distance.pdf", slope=slope, intercept=intercept)
     fout = open("results/results_distance.txt", "w") # Open a file to write the results
     fout.write("\t--- 'Radiation vs distance' results: ---\n")
     fout.write(f"Slope (log(Rad) vs log(d)): {slope}\n")
@@ -120,8 +120,8 @@ def main():
         r_3.append(np.mean(r_3_raw[start:end]))
         r_3_log.append(np.mean(np.log(r_3_raw[start:end])))
     slope, intercept, r_squared = linear_regression(thickness, r_3_log)
-    individual_plot(thickness, r_3, "Thickness (m)", "Radiation ()", "Radiation vs Thickness", "radiation_vs_thickness.pdf")
-    individual_plot(thickness, r_3_log, "Thickness (m)", "Log Radiation", "Log Radiation  vs Thickness", "log_radiation_vs_thickness.pdf", slope=slope, intercept=intercept)
+    individual_plot(thickness, r_3, "Thickness (m)", "Radiation ()", "Figure 5: Radiation vs Thickness", "radiation_vs_thickness.pdf")
+    individual_plot(thickness, r_3_log, "Thickness (m)", "Log Radiation", "Figure 6: Log Radiation  vs Thickness", "log_radiation_vs_thickness.pdf", slope=slope, intercept=intercept)
     fout = open("results/results_thickness.txt", "w") # Open a file to write the results
     fout.write("\t--- 'Radiation vs thickness' results: ---\n")
     fout.write(f"Slope (log(Rad) vs thickness): {slope}\n")

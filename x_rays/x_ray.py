@@ -135,7 +135,7 @@ def main():
     X_data = data['Angle']  # X-axis data (Angle)
     Y_data = [data[str(ii)] for ii in range(1, 7)]  # Y-axis data (Intensities)
 
-    grouped_plot("voltages", voltages, X_data, Y_data, "Angle (°)", "Intensity (a.u.)", "Intensity vs Angle for different voltages", markers, colors, "grouped_intensity_plot_XRay_voltage")
+    grouped_plot("voltages", voltages, X_data, Y_data, "Angle (°)", "Intensity (a.u.)", "Figure 2: Intensity vs Angle for different voltages", markers, colors, "grouped_intensity_plot_XRay_voltage")
     # The degrees were given by eye
     fout.write("Frist order results (given by the Bragg's law) n=1 and d=282 pm:\n")
     fout.write(f"\tK_alpha was fount at 6.4° (aprox); lamba = {bragg(6.4, n=1, d=282e-12):.2e} nm\n")
@@ -146,7 +146,7 @@ def main():
     min_wavelengths = [bragg(theta, n=1, d=282e-12) for theta in min_degrees] 
     inv_volt = [1/(v*1000) for v in voltages]
     slope, intercept, r_squared = linear_regression(inv_volt, min_wavelengths)
-    individual_plot(inv_volt, min_wavelengths, "1/Voltage (1/V)", "Wavelength (nm)", "Wavelength vs 1/Voltage", "wavelength_vs_1_over_voltage.pdf", slope=slope, intercept=intercept)
+    individual_plot(inv_volt, min_wavelengths, "1/Voltage (1/V)", "Wavelength (nm)", "Figure 3:Wavelength vs 1/Voltage", "wavelength_vs_1_over_voltage.pdf", slope=slope, intercept=intercept)
     fout.write("\nWavelength vs 1/Voltage to calculate the Plank's constant:\n")
     fout.write(f"\tSlope = {slope:.2e} m*V\n")
     fout.write(f"\tIntercept = {intercept:.2e} m\n")
@@ -165,7 +165,7 @@ def main():
     data_2 = read_values("change_current_data.txt")
     Y_data_2 = [data_2[str(ii)] for ii in range(1, 5)]  # Y-axis data (Intensities)
     
-    grouped_plot("currents", currents, X_data, Y_data_2, "Angle (°)", "Intensity (a.u.)", "Intensity vs Angle for different currents", markers_2, colors_2, "grouped_intensity_plot_XRay_current")
+    grouped_plot("currents", currents, X_data, Y_data_2, "Angle (°)", "Intensity (a.u.)", "Figure 4:Intensity vs Angle for different currents", markers_2, colors_2, "grouped_intensity_plot_XRay_current")
 
     print("Results were saved in the results folder")
 
