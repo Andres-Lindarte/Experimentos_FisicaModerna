@@ -72,7 +72,7 @@ def grouped_plot(variation_name, variation, x_data, y_data, x_label, y_label, ti
     if variation_name == "voltages":
         label, units = "V", "kV"
     elif variation_name == "currents":
-        label, units = "I", "A"
+        label, units = "I", "mA"
     else:
         label, units = "Variation", ""
 

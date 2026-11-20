@@ -110,7 +110,7 @@ def main():
     # Part 3: 
     file_name_3 = "material_data.txt"
     points_3 = read_values(file_name_3, 'Rad', 'None')
-    thickness = [5e-4, 11e-4, 17.6e-4, 32.1e-4, 43.35e-4, 66.85e-4]
+    thickness = [0.5, 1.1, 1.76, 3.21, 4.335, 6.685]
     r_3_raw = points_3['Rad']
     r_3 = []
     r_3_log = []
@@ -120,12 +120,12 @@ def main():
         r_3.append(np.mean(r_3_raw[start:end]))
         r_3_log.append(np.log(np.mean(r_3_raw[start:end])))
     slope, intercept, r_squared = linear_regression(thickness[1::], r_3_log[1::]) # Exclude the first point 
-    individual_plot(thickness, r_3, "Thickness (m)", "Radiation (a.u)", "Figure 5: Radiation vs Thickness", "radiation_vs_thickness.pdf")
-    individual_plot(thickness[1::], r_3_log[1::], "Thickness (m)", "Log Radiation", "Figure 6: Log Radiation  vs Thickness", "log_radiation_vs_thickness.pdf", slope=slope, intercept=intercept)
+    individual_plot(thickness, r_3, "Thickness (mm)", "Radiation (a.u)", "Figure 5: Radiation vs Thickness", "radiation_vs_thickness.pdf")
+    individual_plot(thickness[1::], r_3_log[1::], "Thickness (mm)", "Log Radiation", "Figure 6: Log Radiation  vs Thickness", "log_radiation_vs_thickness.pdf", slope=slope, intercept=intercept)
     fout = open("results/results_thickness.txt", "w") # Open a file to write the results
     fout.write("\t--- 'Radiation vs thickness' results: ---\n")
     fout.write(f"Slope (log(Rad) vs thickness): {slope}\n")
-    #fout.write(f"Relative error (slope): {relative_error(slope, -19.5)}%\n")
+    fout.write(f"Relative error (slope): {relative_error(slope, -0.027)}%\n")
     fout .write(f"Intercept (log(Rad) vs thickness): {intercept}\n")
     fout.write(f"R-squared (log(Rad) vs thickness): {r_squared}\n")
     fout.close() # Close the file

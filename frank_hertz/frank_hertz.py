@@ -24,7 +24,7 @@ def grouped_plot(variation_name, variation, x_data, y_data, x_label, y_label, ti
     sns.set_style("ticks") # Set the style of the plot
 
     if variation_name == "voltages":
-        label, units = "V", "kV"
+        label, units = "V", "V"
     elif variation_name == "temperatures":
         label, units = "T", "K"
     else:
